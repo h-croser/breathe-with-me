@@ -1,0 +1,55 @@
+{
+  "name": "breathe-with-me",
+  "version": "0.1.0",
+  "packageManager": "pnpm@10.33.2",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/h-croser/breathe-with-me.git"
+  },
+  "private": true,
+  "sideEffects": false,
+  "type": "module",
+  "eslintConfig": "./eslint.config.mjs",
+  "prettier": "./prettier.config.mjs",
+  "scripts": {
+    "dev": "$DEV=true; next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "format": "prettier --write .",
+    "prepare": "husky",
+    "knip": "knip"
+  },
+  "dependencies": {
+    "@mantine/core": "^9.0.1",
+    "@mantine/form": "^9.0.1",
+    "@mantine/hooks": "^9.0.1",
+    "@mantinex/mantine-header": "^2.0.0",
+    "@next/bundle-analyzer": "^16.2.1",
+    "@tabler/icons-react": "^3.40.0",
+    "next": "16.2.3",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-unicorn": "^63.0.0",
+    "husky": "^9.1.7",
+    "knip": "^6.0.2",
+    "lint-staged": "^16.4.0",
+    "postcss": "^8.5.8",
+    "postcss-preset-mantine": "^1.18.0",
+    "postcss-simple-vars": "^7.0.1",
+    "prettier": "^3.8.1",
+    "typescript": "^5",
+    "typescript-eslint": "^8.57.1"
+  }
+}
