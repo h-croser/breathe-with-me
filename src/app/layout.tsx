@@ -23,7 +23,7 @@ const Layout: React.FC<PropsWithChildren> = ({ children }) => {
         <title>Breathe with me</title>
       </head>
       <body>
-        <MantineProvider theme={mantineTheme}>
+        <MantineProvider theme={mantineTheme} defaultColorScheme='auto'>
           <Shell>
             {children}
           </Shell>

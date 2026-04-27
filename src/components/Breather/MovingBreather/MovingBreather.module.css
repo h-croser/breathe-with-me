@@ -1,0 +1,36 @@
+@keyframes grow  {
+    from { clip-path: circle(0%); }
+    to { clip-path: circle(50%); }
+}
+@keyframes shrink {
+    from { clip-path: circle(50%); }
+    to { clip-path: circle(0%); }
+}
+
+.empty {
+    clip-path: circle(0%);
+}
+
+.full {
+    clip-path: circle(50%);
+}
+
+.growing {
+    clip-path: circle(0%);
+    animation-name: grow;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+    animation-iteration-count: 1;
+}
+
+.shrinking {
+    clip-path: circle(50%);
+    animation-name: shrink;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+    animation-iteration-count: 1;
+}
+
+.color {
+    background: radial-gradient(#e66465, #9198e5)
+}

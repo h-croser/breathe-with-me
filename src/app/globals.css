@@ -14,10 +14,10 @@ body {
 }
 
 body {
-  background-color: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-6));
-  background-image: url('/background.svg');
-  background-size: 200px 200px;
-  background-repeat: repeat;
+  /*background-color: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-6));*/
+  /*background-image: url('/background.svg');*/
+  /*background-size: 200px 200px;*/
+  /*background-repeat: repeat;*/
 
   font-family: var(--mantine-font-family), Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;

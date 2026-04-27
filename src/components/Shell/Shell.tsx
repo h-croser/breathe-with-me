@@ -5,11 +5,11 @@ import {
   AppShell,
   AppShellHeader,
   AppShellMain,
-  Box,
+  Box, Container,
   Group,
   Image,
   rem,
-  RemoveScroll
+  RemoveScroll, Title
 } from '@mantine/core';
 import { useHeadroom } from '@mantine/hooks';
 import { ColorSchemeControl } from '@mantinex/mantine-header';
@@ -26,15 +26,18 @@ export const Shell: React.FC<PropsWithChildren> = ({ children }) => {
       transitionDuration={300}
       header={{ height: HEADER_HEIGHT, collapsed: !pinned, offset: false }}
     >
-      <AppShellHeader className={RemoveScroll.classNames.zeroRight}>
-        <Group align="center" justify="space-between" wrap="nowrap" p="md">
-          <Box>
-            <Link href="/" className="mantine-focus-auto">
-              <Image src="/icon.svg" alt="Logo" height={40} />
-            </Link>
-          </Box>
-          <ColorSchemeControl />
-        </Group>
+      <AppShellHeader className={RemoveScroll.classNames.zeroRight} opacity={0.5}>
+        <Container size="xl">
+          <Group align="center" justify="space-between" wrap="nowrap" p="md">
+            <Box>
+              <Link href="/" className="mantine-focus-auto">
+                <Image src="/icon.svg" alt="Logo" height={40} />
+              </Link>
+            </Box>
+            <Title>Breathe with me</Title>
+            <ColorSchemeControl />
+          </Group>
+        </Container>
       </AppShellHeader>
       <AppShellMain pt={rem(HEADER_HEIGHT)}>
         {children}
