@@ -2,28 +2,21 @@
 
 import React, {useEffect, useState} from "react";
 import { Group, Stack, Text } from "@mantine/core";
-import { IconCircle, IconCircleDot, IconHandStop } from "@tabler/icons-react";
 import { MovingBreather, MovingType } from "@/src/components/Breather/MovingBreather/MovingBreather";
 import type { BreatherStateConfig, BreatherStateOrder } from "@/src/components/Breather/BreatherState";
 
 const breatherConfigs: BreatherStateConfig[] = [
   {
     state: 'shrinking',
-    colour: 'sage.7',
     instruction: 'In',
-    icon: <IconCircleDot color='black' />
   },
   {
     state: 'full',
-    colour: 'sage.7',
-    instruction: 'Hold',
-    icon: <IconHandStop color='black' />
+    instruction: 'Hold'
   },
   {
     state: 'growing',
-    colour: 'sage.7',
     instruction: 'Out',
-    icon: <IconCircle color='black' />
   }
 ];
 const configMap = new Map<MovingType, BreatherStateConfig>(
@@ -56,10 +49,8 @@ export const Breather: React.FC = () => {
       <MovingBreather
         type={currentBreatherConfig.state}
         durationSeconds={currentDurationSeconds}
-        colour={currentBreatherConfig.colour}
       />
       <Group justify="center">
-        {currentBreatherConfig.icon}
         <Text>{currentBreatherConfig.instruction}</Text>
       </Group>
     </Stack>
