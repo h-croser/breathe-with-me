@@ -27,7 +27,7 @@ export const Shell: React.FC<PropsWithChildren> = ({ children }) => {
       header={{ height: HEADER_HEIGHT, collapsed: !pinned, offset: false }}
     >
       <AppShellHeader className={RemoveScroll.classNames.zeroRight} opacity={0.5}>
-        <Container size="xl">
+        <Container size="lg">
           <Group align="center" justify="space-between" wrap="nowrap" p="md">
             <Box>
               <Link href="/" className="mantine-focus-auto">
