@@ -1,19 +1,5 @@
 import { createTheme } from '@mantine/core';
-import { Playfair_Display, Lato, Inconsolata } from 'next/font/google';
-
-const playfairDisplay = Playfair_Display({
-  weight: ['400', '500', '600', '700', '800', '900'],
-  style: ['normal', 'italic'],
-  subsets: ['latin'],
-  variable: '--font-playfair-display',
-});
-
-const lato = Lato({
-  weight: ['100', '300', '400', '700', '900'],
-  style: ['normal', 'italic'],
-  subsets: ['latin'],
-  variable: '--font-lato',
-});
+import { Inconsolata, Elms_Sans } from 'next/font/google';
 
 const inconsolata = Inconsolata({
   weight: ['200', '300', '400', '500', '600', '700', '800', '900'],
@@ -22,11 +8,18 @@ const inconsolata = Inconsolata({
   variable: '--font-inconsolata',
 });
 
+const elmsSans = Elms_Sans({
+  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
+  style: 'normal',
+  subsets: ['latin'],
+  variable: '--font-elms-sans',
+});
+
 export const mantineTheme = createTheme({
-  fontFamily: `${lato.style.fontFamily}, sans-serif`,
+  fontFamily: `${elmsSans.style.fontFamily}, sans-serif`,
   fontFamilyMonospace: `${inconsolata.style.fontFamily}, monospace`,
   headings: {
-    fontFamily: `${playfairDisplay.style.fontFamily}, serif`,
+    fontFamily: `${elmsSans.style.fontFamily}, sans-serif`,
   },
   fontSizes: {
     xs: '0.875rem',
