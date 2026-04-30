@@ -27,5 +27,5 @@ export const MovingBreather: React.FC<Props> = ({ type, durationSeconds, colour 
     element.classList.add(classes[type]);
   }, [type, durationSeconds]);
 
-  return <TreeSVG size="100%" reference={reference} baseColour={colour} />;
+  return <TreeSVG size="90vh" reference={reference} baseColour={colour} />;
 }

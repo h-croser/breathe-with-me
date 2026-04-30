@@ -1,4 +1,6 @@
-import React, {RefObject} from "react";
+"use client";
+
+import React, {RefObject, useEffect, useState} from "react";
 import {MantineColor, MantineTheme, parseThemeColor, useMantineColorScheme, useMantineTheme} from "@mantine/core";
 
 const DEFAULT_COLOUR: MantineColor = 'ocean';
@@ -25,7 +27,14 @@ interface Props {
 
 export const TreeSVG: React.FC<Props> = ({ size, reference, baseColour = DEFAULT_COLOUR }) => {
   const theme = useMantineTheme();
-  const isDark = useMantineColorScheme().colorScheme === 'dark';
+  const { colorScheme } = useMantineColorScheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const isDark = mounted ? colorScheme === 'dark' : false;
   const parsedColours = getParsedColours(theme, baseColour, isDark);
 
   return (
@@ -38,8 +47,8 @@ export const TreeSVG: React.FC<Props> = ({ size, reference, baseColour = DEFAULT
     >
       <defs>
         <radialGradient id="gradient">
-          {parsedColours.map(({ offset, colour }) => (
-            <stop key={colour} offset={`${offset}%`} stopColor={colour} />
+          {parsedColours.map((parsedColour, index) => (
+            <stop key={index} offset={`${parsedColour.offset}%`} stopColor={parsedColour.colour} />
           ))}
         </radialGradient>
       </defs>

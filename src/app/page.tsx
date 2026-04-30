@@ -5,7 +5,7 @@ import {Breather} from "@/src/components/Breather/Breather";
 
 const Page: React.FC = () => {
   return (
-    <Container size="xl">
+    <Container size="xl" p="xs">
       <Breather />
     </Container>
   )

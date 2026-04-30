@@ -1,22 +1,23 @@
 'use client';
 
 import React, {useEffect, useState} from "react";
-import { Group, Stack, Text } from "@mantine/core";
+import {Box, Center, Stack} from "@mantine/core";
 import { MovingBreather, MovingType } from "@/src/components/Breather/MovingBreather/MovingBreather";
 import type { BreatherStateConfig, BreatherStateOrder } from "@/src/components/Breather/BreatherState";
+import {InstructionCard} from "@/src/components/Breather/InstructionCard/InstructionCard";
 
 const breatherConfigs: BreatherStateConfig[] = [
   {
     state: 'shrinking',
-    instruction: 'In',
+    instruction: 'out',
   },
   {
     state: 'full',
-    instruction: 'Hold'
+    instruction: 'hold'
   },
   {
     state: 'growing',
-    instruction: 'Out',
+    instruction: 'in',
   }
 ];
 const configMap = new Map<MovingType, BreatherStateConfig>(
@@ -45,14 +46,16 @@ export const Breather: React.FC = () => {
   if (!currentBreatherConfig) throw new Error('Missing configuration');
 
   return (
-    <Stack align="center" m="lg">
+    <Stack align="center" pos="relative" h="100%" w="100%">
       <MovingBreather
         type={currentBreatherConfig.state}
         durationSeconds={currentDurationSeconds}
       />
-      <Group justify="center">
-        <Text>{currentBreatherConfig.instruction}</Text>
-      </Group>
+      <Center pos="absolute" inset={0}>
+        <Box>
+          <InstructionCard instruction={currentBreatherConfig.instruction} />
+        </Box>
+      </Center>
     </Stack>
   );
 }

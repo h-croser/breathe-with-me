@@ -16,7 +16,7 @@ import { ColorSchemeControl } from '@mantinex/mantine-header';
 import { Link } from '@/src/components/Link/Link';
 import '@mantinex/mantine-header/styles.css';
 
-const HEADER_HEIGHT = 80;
+const HEADER_HEIGHT = 50;
 
 export const Shell: React.FC<PropsWithChildren> = ({ children }) => {
   const { pinned } = useHeadroom({ fixedAt: HEADER_HEIGHT });
@@ -28,7 +28,7 @@ export const Shell: React.FC<PropsWithChildren> = ({ children }) => {
     >
       <AppShellHeader className={RemoveScroll.classNames.zeroRight} opacity={0.5}>
         <Container size="lg">
-          <Group align="center" justify="space-between" wrap="nowrap" p="md">
+          <Group align="center" justify="space-between" wrap="nowrap" px="md">
             <Box>
               <Link href="/" className="mantine-focus-auto">
                 <Image src="/icon.svg" alt="Logo" height={40} />
