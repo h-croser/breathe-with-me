@@ -1,12 +1,12 @@
 import React, {useEffect, useRef} from 'react';
 import { TreeSVG } from "@/src/components/Breather/TreeSVG/TreeSVG";
 import {MantineColor} from "@mantine/core";
+import type { BreatherState } from "@/src/types";
 import classes from './MovingBreather.module.css';
 
-export type MovingType = 'growing' | 'shrinking' | 'empty' | 'full';
 
 interface Props {
-  type: MovingType;
+  type: BreatherState;
   durationSeconds?: number;
   colour?: MantineColor;
 }
@@ -27,5 +27,5 @@ export const MovingBreather: React.FC<Props> = ({ type, durationSeconds, colour 
     element.classList.add(classes[type]);
   }, [type, durationSeconds]);
 
-  return <TreeSVG size="90vh" reference={reference} baseColour={colour} />;
+  return <TreeSVG size="min(85vh, 90vw)" reference={reference} baseColour={colour} />;
 }

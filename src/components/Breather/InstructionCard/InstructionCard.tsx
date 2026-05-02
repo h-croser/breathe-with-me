@@ -1,5 +1,5 @@
 import type React from "react";
-import { Center, Paper, Text } from "@mantine/core";
+import {Center, Paper, Text} from "@mantine/core";
 import classes from './InstructionCard.module.css';
 
 interface Props {
@@ -9,13 +9,13 @@ interface Props {
 export const InstructionCard: React.FC<Props> = ({ instruction }) => {
   return (
     <Paper
-      miw={120}
+      w={100}
       radius="md"
-      p="md"
+      p="xs"
       className={classes.frostGlass}
     >
-      <Center>
-        <Text fw={900} c="black" fz={{ base: 28, sm: 33, md: 40 }} lh={1}>
+      <Center h="100%">
+        <Text fw={900} c="black" fz={{ base: 28, sm: 33 }} lh={1}>
           {instruction}
         </Text>
       </Center>

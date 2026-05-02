@@ -15,6 +15,7 @@ import { useHeadroom } from '@mantine/hooks';
 import { ColorSchemeControl } from '@mantinex/mantine-header';
 import { Link } from '@/src/components/Link/Link';
 import '@mantinex/mantine-header/styles.css';
+import {SettingsModal} from "@/src/components/Settings/SettingsModal/SettingsModal";
 
 const HEADER_HEIGHT = 50;
 
@@ -27,15 +28,18 @@ export const Shell: React.FC<PropsWithChildren> = ({ children }) => {
       header={{ height: HEADER_HEIGHT, collapsed: !pinned, offset: false }}
     >
       <AppShellHeader className={RemoveScroll.classNames.zeroRight} opacity={0.5}>
-        <Container size="lg">
-          <Group align="center" justify="space-between" wrap="nowrap" px="md">
+        <Container size="lg" h="100%">
+          <Group align="center" justify="space-between" wrap="nowrap" px="sm" h="100%">
             <Box>
               <Link href="/" className="mantine-focus-auto">
                 <Image src="/icon.svg" alt="Logo" height={40} />
               </Link>
             </Box>
-            <Title>Breathe with me</Title>
-            <ColorSchemeControl />
+            <Title fz={30}>Breathe with me</Title>
+            <Group align="center">
+              <SettingsModal />
+              <ColorSchemeControl />
+            </Group>
           </Group>
         </Container>
       </AppShellHeader>

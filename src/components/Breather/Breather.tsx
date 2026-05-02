@@ -1,39 +1,32 @@
 'use client';
 
 import React, {useEffect, useState} from "react";
-import {Box, Center, Stack} from "@mantine/core";
-import { MovingBreather, MovingType } from "@/src/components/Breather/MovingBreather/MovingBreather";
-import type { BreatherStateConfig, BreatherStateOrder } from "@/src/components/Breather/BreatherState";
-import {InstructionCard} from "@/src/components/Breather/InstructionCard/InstructionCard";
+import { Center, Stack } from "@mantine/core";
+import { MovingBreather } from "@/src/components/Breather/MovingBreather/MovingBreather";
+import { InstructionCard } from "@/src/components/Breather/InstructionCard/InstructionCard";
+import { useSettings } from "@/src/components/Settings/SettingsProvider/SettingsContext";
+import type { BreatherState } from "@/src/types";
 
-const breatherConfigs: BreatherStateConfig[] = [
-  {
-    state: 'shrinking',
-    instruction: 'out',
-  },
-  {
-    state: 'full',
-    instruction: 'hold'
-  },
-  {
-    state: 'growing',
-    instruction: 'in',
-  }
-];
-const configMap = new Map<MovingType, BreatherStateConfig>(
-  breatherConfigs.map(config => [config.state, config])
-);
-
-const breatherStateOrder: BreatherStateOrder = [
-  { state: 'growing', duration: 4 },
-  { state: 'full', duration: 7 },
-  { state: 'shrinking', duration: 8 }
-];
+const breatherStateLabels = new Map<BreatherState, string>([
+  ['shrinking', 'out'],
+  ['growing', 'in'],
+  ['empty', 'hold'],
+  ['full', 'hold']
+]);
 
 export const Breather: React.FC = () => {
   const [breatherStateIndex, setBreatherStateIndex] = useState(0);
-  const currentDurationSeconds = breatherStateOrder[breatherStateIndex].duration;
-  const currentBreatherConfig = configMap.get(breatherStateOrder[breatherStateIndex].state);
+  const { settings: { breatherStateOrder } } = useSettings();
+
+  useEffect(() => {
+    setBreatherStateIndex(0);
+  }, [breatherStateOrder.length]);
+
+  const {
+    state: currentBreatherState,
+    durationSeconds: currentDurationSeconds
+  } = breatherStateOrder[breatherStateIndex];
+  const currentBreatherLabel = breatherStateLabels.get(currentBreatherState) ?? '';
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -43,18 +36,14 @@ export const Breather: React.FC = () => {
     return () => clearInterval(interval);
   }, [breatherStateIndex, breatherStateOrder, currentDurationSeconds]);
 
-  if (!currentBreatherConfig) throw new Error('Missing configuration');
-
   return (
     <Stack align="center" pos="relative" h="100%" w="100%">
-      <MovingBreather
-        type={currentBreatherConfig.state}
-        durationSeconds={currentDurationSeconds}
-      />
-      <Center pos="absolute" inset={0}>
-        <Box>
-          <InstructionCard instruction={currentBreatherConfig.instruction} />
-        </Box>
+      <InstructionCard instruction={currentBreatherLabel} />
+      <Center h="100%">
+        <MovingBreather
+          type={currentBreatherState}
+          durationSeconds={currentDurationSeconds}
+        />
       </Center>
     </Stack>
   );

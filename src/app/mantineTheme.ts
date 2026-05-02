@@ -6,6 +6,8 @@ const inconsolata = Inconsolata({
   style: 'normal',
   subsets: ['latin'],
   variable: '--font-inconsolata',
+  display: 'swap',
+  adjustFontFallback: false
 });
 
 const elmsSans = Elms_Sans({
@@ -13,13 +15,15 @@ const elmsSans = Elms_Sans({
   style: 'normal',
   subsets: ['latin'],
   variable: '--font-elms-sans',
+  display: 'swap',
+  adjustFontFallback: false
 });
 
 export const mantineTheme = createTheme({
-  fontFamily: `${elmsSans.style.fontFamily}, sans-serif`,
-  fontFamilyMonospace: `${inconsolata.style.fontFamily}, monospace`,
+  fontFamily: elmsSans.style.fontFamily,
+  fontFamilyMonospace: inconsolata.style.fontFamily,
   headings: {
-    fontFamily: `${elmsSans.style.fontFamily}, sans-serif`,
+    fontFamily: elmsSans.style.fontFamily
   },
   fontSizes: {
     xs: '0.875rem',

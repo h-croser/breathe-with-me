@@ -5,8 +5,11 @@ import {Shell} from "@/src/components/Shell/Shell";
 import type { Metadata } from "next";
 import '@mantine/core/styles.css';
 import './globals.css';
+import {SettingsProvider} from "@/src/components/Settings/SettingsProvider/SettingsProvider";
 
 export const metadata: Metadata = {
+  title: 'Breathe with me',
+  description: 'A tool for mitigating anxiety symptoms',
   icons: {
     icon: [
       { url: '/icon.svg', type: 'image/svg' }
@@ -24,9 +27,11 @@ const Layout: React.FC<PropsWithChildren> = ({ children }) => {
       </head>
       <body>
         <MantineProvider theme={mantineTheme} defaultColorScheme='auto'>
-          <Shell>
-            {children}
-          </Shell>
+          <SettingsProvider>
+            <Shell>
+              {children}
+            </Shell>
+          </SettingsProvider>
         </MantineProvider>
       </body>
     </html>
