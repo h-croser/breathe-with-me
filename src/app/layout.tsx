@@ -1,11 +1,13 @@
 import React, {PropsWithChildren} from 'react';
-import {ColorSchemeScript, MantineProvider} from '@mantine/core';
+import { ColorSchemeScript, MantineProvider } from '@mantine/core';
+import { Notifications } from "@mantine/notifications";
 import { mantineTheme } from '@/src/app/mantineTheme';
-import {Shell} from "@/src/components/Shell/Shell";
+import { Shell } from "@/src/components/Shell/Shell";
+import { SettingsProvider } from "@/src/components/Settings/SettingsProvider/SettingsProvider";
 import type { Metadata } from "next";
 import '@mantine/core/styles.css';
+import '@mantine/notifications/styles.css';
 import './globals.css';
-import {SettingsProvider} from "@/src/components/Settings/SettingsProvider/SettingsProvider";
 
 export const metadata: Metadata = {
   title: 'Breathe with me',
@@ -27,6 +29,7 @@ const Layout: React.FC<PropsWithChildren> = ({ children }) => {
       </head>
       <body>
         <MantineProvider theme={mantineTheme} defaultColorScheme='auto'>
+          <Notifications position="bottom-center" containerWidth={600} />
           <SettingsProvider>
             <Shell>
               {children}

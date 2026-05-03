@@ -12,10 +12,11 @@ export const InstructionCard: React.FC<Props> = ({ instruction }) => {
       w={100}
       radius="md"
       p="xs"
+      shadow="lg"
       className={classes.frostGlass}
     >
       <Center h="100%">
-        <Text fw={900} c="black" fz={{ base: 28, sm: 33 }} lh={1}>
+        <Text fw={600} c="black" fz={{ base: 28, sm: 33 }} lh={1}>
           {instruction}
         </Text>
       </Center>

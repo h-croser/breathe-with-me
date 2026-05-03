@@ -24,6 +24,7 @@
     "@mantine/core": "^9.0.1",
     "@mantine/form": "^9.0.1",
     "@mantine/hooks": "^9.0.1",
+    "@mantine/notifications": "^9.1.1",
     "@mantinex/mantine-header": "^2.0.0",
     "@next/bundle-analyzer": "^16.2.1",
     "@tabler/icons-react": "^3.40.0",

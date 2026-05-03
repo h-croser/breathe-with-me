@@ -2,13 +2,13 @@
 
 import React, { PropsWithChildren, useCallback } from "react";
 import { useLocalStorage } from "@mantine/hooks";
-import type {BreatherState, Settings} from "@/src/types";
 import {
   BooleanSettingKey,
   SettingsContext,
   SettingsContextValue
 } from "@/src/components/Settings/SettingsProvider/SettingsContext";
 import { SettingsSchema } from "@/src/constants";
+import type {BreatherState, GroundingTechniqueGroup, Settings} from "@/src/types";
 
 const DEFAULT_SETTINGS: Settings = {
   preset: '4-7-8',
@@ -17,7 +17,11 @@ const DEFAULT_SETTINGS: Settings = {
     { state: 'full', durationSeconds: 7 },
     { state: 'shrinking', durationSeconds: 8 }
   ],
-  grounding: true
+  grounding: [
+    { group: '5-4-3-2-1', active: true },
+    { group: 'Mantra', active: true },
+    { group: 'Tense/relax', active: true }
+  ]
 };
 
 const deserialize = (value: string | undefined): Settings => {
@@ -66,6 +70,18 @@ export const SettingsProvider: React.FC<PropsWithChildren> = ({ children }) => {
     }, [settings.breatherStateOrder, updateSettings]
   );
 
+  const setTechniqueGroupActive = useCallback(
+    (group: GroundingTechniqueGroup, active: boolean) => {
+      const currentGroupActives = [...settings.grounding];
+      currentGroupActives.forEach((groupActive, index) => {
+        if (groupActive.group === group) {
+          currentGroupActives[index].active = active;
+        }
+      });
+      updateSettings({ grounding: currentGroupActives });
+    }, [updateSettings, settings.grounding]
+  );
+
   const toggle = useCallback(
     (key: BooleanSettingKey) =>
       setStoredSettings((prev) => ({ ...prev, [key]: !prev[key] })),
@@ -78,6 +94,7 @@ export const SettingsProvider: React.FC<PropsWithChildren> = ({ children }) => {
     toggle,
     set,
     setStateDuration,
+    setTechniqueGroupActive,
     resetSettings: removeValue
   } satisfies SettingsContextValue;
 

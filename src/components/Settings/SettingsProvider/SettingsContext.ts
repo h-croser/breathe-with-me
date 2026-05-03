@@ -1,5 +1,5 @@
 import { createContext, useContext } from 'react';
-import type {BreatherState, Settings} from "@/src/types";
+import type {BreatherState, GroundingTechniqueGroup, Settings} from "@/src/types";
 
 export type BooleanSettingKey = {
   [K in keyof Settings]: Settings[K] extends boolean ? K : never;
@@ -11,6 +11,7 @@ export interface SettingsContextValue {
   toggle: (key: BooleanSettingKey) => void;
   set: <K extends keyof Settings>(key: K, value: Settings[K]) => void;
   setStateDuration: (state: BreatherState, durationSeconds: number) => void;
+  setTechniqueGroupActive: (group: GroundingTechniqueGroup, active: boolean) => void;
   resetSettings: () => void;
 }
 

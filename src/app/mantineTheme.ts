@@ -1,4 +1,4 @@
-import { createTheme } from '@mantine/core';
+import {createTheme, DEFAULT_THEME} from '@mantine/core';
 import { Inconsolata, Elms_Sans } from 'next/font/google';
 
 const inconsolata = Inconsolata({
@@ -16,14 +16,15 @@ const elmsSans = Elms_Sans({
   subsets: ['latin'],
   variable: '--font-elms-sans',
   display: 'swap',
-  adjustFontFallback: false
+  adjustFontFallback: false,
+  fallback: ['system-ui', 'Arial']
 });
 
 export const mantineTheme = createTheme({
-  fontFamily: elmsSans.style.fontFamily,
-  fontFamilyMonospace: inconsolata.style.fontFamily,
+  fontFamily: `${elmsSans.style.fontFamily}, ${DEFAULT_THEME.fontFamily}`,
+  fontFamilyMonospace: `${inconsolata.style.fontFamily}, monospace`,
   headings: {
-    fontFamily: elmsSans.style.fontFamily
+    fontFamily: `${elmsSans.style.fontFamily}, ${DEFAULT_THEME.fontFamily}`
   },
   fontSizes: {
     xs: '0.875rem',
