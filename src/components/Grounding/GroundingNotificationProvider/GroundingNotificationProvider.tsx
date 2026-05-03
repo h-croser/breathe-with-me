@@ -15,47 +15,45 @@ export const GroundingNotificationProvider: React.FC = () => {
     .filter(technique => technique.active)
     .map(technique => technique.group);
   const filteredTechniques = groundingTechniques.filter(technique => activeGroups.includes(technique.group));
+  const techniquesActive = filteredTechniques.length > 0;
 
   useEffect(() => {
     if (index >= filteredTechniques.length) setIndex(0);
   }, [filteredTechniques.length]);
 
-  const {
-    group: currentGroup,
-    label: currentLabel,
-    durationSeconds: currentDurationSeconds,
-    colour: currentColour,
-  } = filteredTechniques[index];
+  const currentTechnique = filteredTechniques.at(index);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      if (grounding) {
+      if (techniquesActive) {
         setIndex(previous => (previous + 1) % filteredTechniques.length);
       }
-    }, currentDurationSeconds * 1000);
+    }, (currentTechnique?.durationSeconds ?? 1) * 1000);
 
     return () => clearInterval(interval);
-  }, [currentDurationSeconds, grounding]);
+  }, [currentTechnique?.durationSeconds, grounding]);
 
   useEffect(() => {
     const notificationDetails = {
-      title: <Text size="md">{currentGroup}: {currentLabel}</Text>,
+      title: <Text size="md">{currentTechnique?.group}: {currentTechnique?.label}</Text>,
       message: <Text size="xs">You can disable grounding techniques in settings</Text>,
-      color: currentColour,
+      color: currentTechnique?.colour,
       autoClose: false,
       withCloseButton: false
     };
-    if (notificationId) {
-      notifications.hide(notificationId);
+    if (techniquesActive) {
+      if (notificationId) {
+        notifications.hide(notificationId);
+      }
+      const newNotificationId = notifications.show({
+        ...notificationDetails
+      });
+      setNotificationId(newNotificationId);
     }
-    const newNotificationId = notifications.show({
-      ...notificationDetails
-    });
-    setNotificationId(newNotificationId);
   }, [index]);
 
   useEffect(() => {
-    if (!grounding && notificationId) {
+    if (!techniquesActive && notificationId) {
       setNotificationId(null);
       notifications.hide(notificationId);
     }

@@ -35,7 +35,7 @@ export const Shell: React.FC<PropsWithChildren> = ({ children }) => {
                 <Image src="/icon.svg" alt="Logo" height={40} />
               </Link>
             </Box>
-            <Title fz={30}>Breathe with me</Title>
+            <Title fz={{base: 23, sm: 30}}>Breathe with me</Title>
             <Group align="center">
               <SettingsModal />
               <ColorSchemeControl />
