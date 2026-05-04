@@ -12,7 +12,9 @@ const nextConfig: NextConfig = {
   },
   compress: true,
   reactStrictMode: true,
-  allowedDevOrigins: ['localhost:3000', '127.0.0.1']
+  allowedDevOrigins: ['localhost:3000', '127.0.0.1'],
+  output: 'export',
+  basePath: '/breathe-with-me'
 };
 
 export default withBundleAnalyzer(nextConfig);
