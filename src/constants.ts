@@ -8,7 +8,7 @@ export const SettingsSchema = z.object({
   preset: z.enum(PRESETS),
   breatherStateOrder: z.array(z.object({
     state: z.enum(STATES),
-    durationSeconds: z.number()
+    durationSeconds: z.number().min(0).max(600)
   })),
   grounding: z.array(z.object({
     group: z.enum(TECHNIQUE_GROUP),

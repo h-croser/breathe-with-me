@@ -13,9 +13,9 @@ import {
 } from '@mantine/core';
 import { useHeadroom } from '@mantine/hooks';
 import { ColorSchemeControl } from '@mantinex/mantine-header';
+import {SettingsModal} from "@/src/components/Settings/SettingsModal/SettingsModal";
 import { Link } from '@/src/components/Link/Link';
 import '@mantinex/mantine-header/styles.css';
-import {SettingsModal} from "@/src/components/Settings/SettingsModal/SettingsModal";
 
 const HEADER_HEIGHT = 50;
 

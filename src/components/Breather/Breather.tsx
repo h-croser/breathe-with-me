@@ -15,33 +15,42 @@ const breatherStateLabels = new Map<BreatherState, string>([
 ]);
 
 export const Breather: React.FC = () => {
-  const [breatherStateIndex, setBreatherStateIndex] = useState(0);
+  const [index, setIndex] = useState(0);
   const { settings: { breatherStateOrder } } = useSettings();
 
-  useEffect(() => {
-    setBreatherStateIndex(0);
-  }, [breatherStateOrder.length]);
-
-  const {
-    state: currentBreatherState,
-    durationSeconds: currentDurationSeconds
-  } = breatherStateOrder[breatherStateIndex];
-  const currentBreatherLabel = breatherStateLabels.get(currentBreatherState) ?? '';
+  const breatherStateOrderFiltered = breatherStateOrder.filter(
+    statePosition => statePosition.durationSeconds > 0
+  );
 
   useEffect(() => {
+    if (index >= breatherStateOrderFiltered.length) setIndex(0);
+  }, [breatherStateOrderFiltered.length]);
+
+  const currentBreatherStatePosition = breatherStateOrderFiltered.at(index);
+  const currentState = currentBreatherStatePosition?.state;
+  const currentDurationSeconds = currentBreatherStatePosition?.durationSeconds;
+  const currentBreatherLabel = currentState
+    ? breatherStateLabels.get(currentState) ?? ''
+    : '';
+
+  useEffect(() => {
+    if (breatherStateOrderFiltered.length === 0) return;
+
     const interval = setInterval(() => {
-      setBreatherStateIndex(previous => (previous + 1) % breatherStateOrder.length);
-    }, currentDurationSeconds * 1000);
+      setIndex(previous => (previous + 1) % breatherStateOrderFiltered.length);
+    }, (currentDurationSeconds ?? 1) * 1000);
 
     return () => clearInterval(interval);
-  }, [breatherStateIndex, breatherStateOrder, currentDurationSeconds]);
+  }, [index, breatherStateOrderFiltered, currentDurationSeconds]);
+
+  if (!currentState) return null;
 
   return (
     <Stack align="center" pos="relative" h="100%" w="100%">
       <InstructionCard instruction={currentBreatherLabel} />
       <Center h="100%">
         <MovingBreather
-          type={currentBreatherState}
+          type={currentState}
           durationSeconds={currentDurationSeconds}
         />
       </Center>

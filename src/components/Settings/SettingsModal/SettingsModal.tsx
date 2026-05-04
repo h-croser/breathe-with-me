@@ -53,6 +53,7 @@ export const SettingsModal: React.FC = () => {
             {STATES.map((state, index) => {
               const stateLabel = breatherStateLabels.get(state) ?? 'Unknown';
               const currentStateDuration = settings.breatherStateOrder.find(stateOrder => stateOrder.state === state)?.durationSeconds ?? 0;
+              const zeroAllowed = (state === 'empty') || (state === 'full');
               return (
                 <NumberInput
                   key={index}
@@ -60,9 +61,14 @@ export const SettingsModal: React.FC = () => {
                   variant="filled"
                   label={`${stateLabel} duration`}
                   description="How long in seconds the phase will last"
-                  min={0}
+                  min={zeroAllowed ? 0 : 0.1}
+                  max={600}
+                  step={0.5}
+                  decimalScale={1}
+                  allowLeadingZeros={false}
                   value={currentStateDuration}
                   onChange={(value) => updateStateDuration(state, value.valueOf())}
+                  isAllowed={(value) => value.value !== ''}
                 />
               );
             })}
