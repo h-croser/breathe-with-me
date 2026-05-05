@@ -9,12 +9,14 @@ import '@mantine/core/styles.css';
 import '@mantine/notifications/styles.css';
 import './globals.css';
 
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
+
 export const metadata: Metadata = {
   title: 'Breathe with me',
   description: 'A tool for mitigating anxiety symptoms',
   icons: {
     icon: [
-      { url: '/icon.svg', type: 'image/svg' }
+      { url: `${BASE_PATH}/icon.svg`, type: 'image/svg' }
     ],
   },
 };
@@ -27,7 +29,11 @@ const Layout: React.FC<PropsWithChildren> = ({ children }) => {
         <link rel="icon" href="/icon.svg" type="image/svg" />
         <title>Breathe with me</title>
       </head>
-      <body>
+      <body
+        style={{
+          backgroundImage: `url('${BASE_PATH}/background.svg')`
+        }}
+      >
         <MantineProvider theme={mantineTheme} defaultColorScheme='auto'>
           <Notifications position="bottom-center" containerWidth={600} />
           <SettingsProvider>

@@ -1,6 +1,8 @@
 import type { NextConfig } from 'next';
 import bundleAnalyzer from '@next/bundle-analyzer';
 
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
+
 const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYSE_BUNDLE === 'true'
 });
@@ -14,7 +16,7 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   allowedDevOrigins: ['localhost:3000', '127.0.0.1'],
   output: 'export',
-  basePath: '/breathe-with-me'
+  basePath: BASE_PATH
 };
 
 export default withBundleAnalyzer(nextConfig);

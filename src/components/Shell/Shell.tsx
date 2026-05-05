@@ -1,6 +1,7 @@
 'use client';
 
 import React, {PropsWithChildren} from 'react';
+import NextImage from 'next/image';
 import {
   AppShell,
   AppShellHeader,
@@ -17,6 +18,8 @@ import {SettingsModal} from "@/src/components/Settings/SettingsModal/SettingsMod
 import { Link } from '@/src/components/Link/Link';
 import '@mantinex/mantine-header/styles.css';
 
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
+
 const HEADER_HEIGHT = 50;
 
 export const Shell: React.FC<PropsWithChildren> = ({ children }) => {
@@ -32,7 +35,14 @@ export const Shell: React.FC<PropsWithChildren> = ({ children }) => {
           <Group align="center" justify="space-between" wrap="nowrap" px="sm" h="100%">
             <Box>
               <Link href="/" className="mantine-focus-auto">
-                <Image src="/icon.svg" alt="Logo" height={40} />
+                <Image
+                  src={`${BASE_PATH}/icon.svg`}
+                  alt="Logo"
+                  height={40}
+                  width={40}
+                  component={NextImage}
+                  priority
+                />
               </Link>
             </Box>
             <Title fz={{base: 23, sm: 30}}>Breathe with me</Title>
