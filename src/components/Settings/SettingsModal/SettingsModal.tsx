@@ -1,6 +1,16 @@
 import type React from "react";
-import {useDisclosure} from "@mantine/hooks";
-import {ActionIcon, Modal, NumberInput, SegmentedControl, Stack, Switch, Text} from "@mantine/core";
+import {useDisclosure, useMediaQuery} from "@mantine/hooks";
+import {
+  ActionIcon,
+  em,
+  Modal,
+  NumberInput,
+  SegmentedControl,
+  Stack,
+  Switch,
+  Text,
+  useMantineTheme
+} from "@mantine/core";
 import {IconSettings} from "@tabler/icons-react";
 import {useSettings} from "@/src/components/Settings/SettingsProvider/SettingsContext";
 import {presetLabels, presetStateOrders} from "@/src/components/Settings/SettingsModal/presets";
@@ -17,11 +27,13 @@ const breatherStateLabels = new Map<BreatherState, string>([
 export const SettingsModal: React.FC = () => {
   const [opened, { open, close }] = useDisclosure(false);
   const { settings, set, setStateDuration, setTechniqueGroupActive } = useSettings();
+  const theme = useMantineTheme();
+  const isSmallWidth = useMediaQuery(`(max-width: ${em(theme.breakpoints.sm)})`);
 
   const updatePreset = (newPreset: BreatherPreset) => {
     const newBreatherStateOrder = presetStateOrders.get(newPreset);
     if (newBreatherStateOrder) {
-      set('breatherStateOrder', newBreatherStateOrder);
+      set('breatherStateOrder', [...newBreatherStateOrder]);
     }
     set('preset', newPreset);
   };
@@ -34,7 +46,7 @@ export const SettingsModal: React.FC = () => {
 
   return (
     <>
-      <Modal opened={opened} onClose={close} title="Settings">
+      <Modal opened={opened} onClose={close} title="Settings" zIndex={500}>
         <Stack gap="lg">
           <Stack gap="xs">
             <Text fw={600}>Preset</Text>
@@ -46,6 +58,8 @@ export const SettingsModal: React.FC = () => {
                 label: presetLabels.get(preset) ?? '',
                 value: preset
               }))}
+              fullWidth
+              orientation={isSmallWidth ? 'vertical' : 'horizontal'}
             />
           </Stack>
           <Stack gap="xs">
@@ -59,8 +73,7 @@ export const SettingsModal: React.FC = () => {
                   key={index}
                   ml="sm"
                   variant="filled"
-                  label={`${stateLabel} duration`}
-                  description="How long in seconds the phase will last"
+                  label={`${stateLabel} duration (seconds)`}
                   min={zeroAllowed ? 0 : 0.1}
                   max={600}
                   step={0.5}
@@ -68,7 +81,6 @@ export const SettingsModal: React.FC = () => {
                   allowLeadingZeros={false}
                   value={currentStateDuration}
                   onChange={(value) => updateStateDuration(state, value.valueOf())}
-                  isAllowed={(value) => value.value !== ''}
                 />
               );
             })}

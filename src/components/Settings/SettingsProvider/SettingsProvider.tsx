@@ -60,7 +60,7 @@ export const SettingsProvider: React.FC<PropsWithChildren> = ({ children }) => {
 
   const setStateDuration = useCallback(
     (state: BreatherState, durationSeconds: number) => {
-      const currentStateOrder = [...settings.breatherStateOrder];
+      const currentStateOrder = structuredClone(settings.breatherStateOrder);
       currentStateOrder.forEach((statePosition, index) => {
         if (statePosition.state === state) {
           currentStateOrder[index].durationSeconds = durationSeconds;
@@ -72,7 +72,7 @@ export const SettingsProvider: React.FC<PropsWithChildren> = ({ children }) => {
 
   const setTechniqueGroupActive = useCallback(
     (group: GroundingTechniqueGroup, active: boolean) => {
-      const currentGroupActives = [...settings.grounding];
+      const currentGroupActives = structuredClone(settings.grounding);
       currentGroupActives.forEach((groupActive, index) => {
         if (groupActive.group === group) {
           currentGroupActives[index].active = active;

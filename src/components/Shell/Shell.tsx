@@ -31,7 +31,7 @@ export const Shell: React.FC<PropsWithChildren> = ({ children }) => {
       header={{ height: HEADER_HEIGHT, collapsed: !pinned, offset: false }}
     >
       <AppShellHeader className={RemoveScroll.classNames.zeroRight} opacity={0.5}>
-        <Container size="lg" h="100%">
+        <Container size="lg" h="100%" miw={300}>
           <Group align="center" justify="space-between" wrap="nowrap" px="sm" h="100%">
             <Box>
               <Link href="/" className="mantine-focus-auto">
@@ -45,8 +45,8 @@ export const Shell: React.FC<PropsWithChildren> = ({ children }) => {
                 />
               </Link>
             </Box>
-            <Title fz={{base: 23, sm: 30}}>Breathe with me</Title>
-            <Group align="center">
+            <Title fz={{base: 20, sm: 25, md: 30}}>Breathe with me</Title>
+            <Group align="center" wrap="nowrap">
               <SettingsModal />
               <ColorSchemeControl />
             </Group>
