@@ -13,7 +13,7 @@ const fourSevenEightOrder: Settings['breatherStateOrder'] = [
     state: 'shrinking',
     durationSeconds: 8
   }
-];
+] as const;
 
 const BoxOrder: Settings['breatherStateOrder'] = [
   {
@@ -32,7 +32,7 @@ const BoxOrder: Settings['breatherStateOrder'] = [
     state: 'empty',
     durationSeconds: 4
   }
-];
+] as const;
 
 export const presetStateOrders = new Map<BreatherPreset, Settings['breatherStateOrder']>([
   ['4-7-8', fourSevenEightOrder],
